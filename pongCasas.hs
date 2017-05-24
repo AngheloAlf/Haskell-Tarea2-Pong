@@ -3,7 +3,7 @@ import Graphics.Gloss.Interface.Pure.Game
 import Graphics.Gloss.Data.Picture
 
 velPaleta = 5 :: Float
-largoPaleta = 40 :: Float
+largoPaleta = 50 :: Float
 distPaleta = 450 :: Float
 medLenX = 500 :: Float
 medLenY = 300 :: Float
@@ -15,6 +15,7 @@ cancha = Color cyan (dibujarRect (-medLenX) (-medLenY) (medLenX) (medLenY))
 
 dibujarPaleta :: Float -> Float -> Picture
 dibujarPaleta x y = dibujarRect (x-10) (y - largoPaleta / 2) (x+10) (y + largoPaleta / 2)
+
 dibujarPelota :: Float -> Float -> Picture
 dibujarPelota x y = dibujarRect (x-10) (y-10) (x+10) (y+10)
 
@@ -48,10 +49,10 @@ procInput _ uni = uni
 
 procTiempo :: Float -> Universo -> Universo
 procTiempo dt uni = let
-    actualizarPal pa = if (obtenerPosPaleta (pa) >= medLenY) 
-        then pa {pal_y = pal_y pa - (10)} 
-        else if (obtenerPosPaleta (pa) <= -medLenY)
-            then pa {pal_y = pal_y pa + (10)}
+    actualizarPal pa = if (obtenerPosPaleta (pa) >= 280) 
+        then pa {pal_y = pal_y pa - (1)} 
+        else if (obtenerPosPaleta (pa) <= -280)
+            then pa {pal_y = pal_y pa + (1)}
             else pa {pal_y = pal_y pa + pal_vy pa}
         
     in uni {
