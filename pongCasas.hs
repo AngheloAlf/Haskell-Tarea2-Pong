@@ -37,21 +37,29 @@ obtenerPosPaleta (Paleta pal_y pal_vy) = pal_y
 
 procInput :: Event -> Universo -> Universo
 procInput (EventKey (SpecialKey KeyUp) Down _ _) uni =
-    uni {paleta1 = (paleta1 uni) {pal_vy = pal_vy (paleta1 uni) + velPaleta}}
+    uni {paleta2 = (paleta2 uni) {pal_vy = pal_vy (paleta2 uni) + velPaleta}}
 procInput (EventKey (SpecialKey KeyUp) Up _ _) uni =
-    uni {paleta1 = (paleta1 uni) {pal_vy = pal_vy (paleta1 uni) - velPaleta}}
+    uni {paleta2 = (paleta2 uni) {pal_vy = pal_vy (paleta2 uni) - velPaleta}}
 procInput (EventKey (SpecialKey KeyDown) Down _ _) uni =
-    uni {paleta1 = (paleta1 uni) {pal_vy = pal_vy (paleta1 uni) - velPaleta}}
+    uni {paleta2 = (paleta2 uni) {pal_vy = pal_vy (paleta2 uni) - velPaleta}}
 procInput (EventKey (SpecialKey KeyDown) Up _ _) uni =
+    uni {paleta2 = (paleta2 uni) {pal_vy = pal_vy (paleta2 uni) + velPaleta}}
+procInput (EventKey (Char 'q') Down _ _) uni =
     uni {paleta1 = (paleta1 uni) {pal_vy = pal_vy (paleta1 uni) + velPaleta}}
+procInput (EventKey (Char 'q') Up _ _) uni =
+    uni {paleta1 = (paleta1 uni) {pal_vy = pal_vy (paleta1 uni) - velPaleta}}
+procInput (EventKey (Char 'a') Down _ _) uni =
+    uni {paleta1 = (paleta1 uni) {pal_vy = pal_vy (paleta1 uni) - velPaleta}}
+procInput (EventKey (Char 'a') Up _ _) uni =
+    uni {paleta1 = (paleta1 uni) {pal_vy = pal_vy (paleta1 uni) + velPaleta}}    
 procInput _ uni = uni
 
 
 procTiempo :: Float -> Universo -> Universo
 procTiempo dt uni = let
-    actualizarPal pa = if (obtenerPosPaleta (pa) >= 280) 
+    actualizarPal pa = if (obtenerPosPaleta (pa) >= 275) 
         then pa {pal_y = pal_y pa - (1)} 
-        else if (obtenerPosPaleta (pa) <= -280)
+        else if (obtenerPosPaleta (pa) <= -275)
             then pa {pal_y = pal_y pa + (1)}
             else pa {pal_y = pal_y pa + pal_vy pa}
         
